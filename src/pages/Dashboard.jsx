@@ -6,16 +6,23 @@ export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
   const [loading, setLoading] = useState(true);
+  const [maxPrice, setMaxPrice] = useState(3000);
 
   useEffect(() => {
-    async function fetchListings() {
-      setLoading(true);
-      const {data, error} = await supabase.from('dorms').select('*');
-      if(!error) setListings(data);
+    // set a timer to fetch data after 300ms of silence
+    const delayDebounceFn = setTimeout(async () => {
+      console.log("[FETCHING] Dorms from Supabase...");
+      const { data, error } = await supabase  
+        .from('dorms')
+        .select('*')
+        .lte('price', maxPrice);
       setLoading(false);
-    }
-    fetchListings();
-  }, []);
+      if (!error) setListings(data);
+      console.log(`[SUCCESS] Data fetched from Supabase`)
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [maxPrice]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -34,6 +41,16 @@ export default function Dashboard() {
       <Link to="/add">+ Add New Dorm Listing</Link> 
 
       <h3>Active Listings ({listings.length})</h3>
+      <label>Max Price: ₱{maxPrice}</label>
+      <input
+        type="range"
+        min="1000"
+        max="10000"
+        step="500"
+        value={maxPrice}
+        // Updates instantly so the visual handle moves perfectly smooth
+        onChange={(e) => setMaxPrice(Number(e.target.value))}
+      />
       {listings.map(item => (
         <div key={item.id}>
           <h4>{item.name}</h4>
