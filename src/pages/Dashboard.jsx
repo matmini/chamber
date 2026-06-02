@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom'; 
+import DormCard from '../components/DormCard.jsx';
 
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
@@ -53,17 +54,10 @@ export default function Dashboard() {
 
       <h3>Active Listings ({listings.length})</h3>
       <label>Max Price: ₱{maxPrice}</label>
-      <input
-        type="range"
-        min="1000"
-        max="10000"
-        step="500"
-        value={maxPrice}
-        // Updates instantly so the visual handle moves perfectly smooth
+      <input type="range" min="1000" max="10000" step="500"value={maxPrice}
         onChange={(e) => setMaxPrice(Number(e.target.value))}
       />
 
-      {/**  Text Search Input */}
       <div>
         <label>Search: </label>
         <input 
@@ -75,8 +69,7 @@ export default function Dashboard() {
       </div>
       {listings.map(item => (
         <div key={item.id}>
-          <h4>{item.name}</h4>
-          <p>Php {item.price}/month</p>
+          <DormCard key={item.id} listing={item}/>
         </div>
       ))}
     </div>
