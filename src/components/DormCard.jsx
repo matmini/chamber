@@ -55,7 +55,8 @@ const DormCard = ({ listing }) => {
     hasAircon : listing.has_aircon, 
     tenantType: listing.tenant_type,
     allowVisitors: listing.visitors_allowed,
-    allowCooking : listing.cooking_allowed
+    allowCooking : listing.cooking_allowed,
+    allowPets : listing.pets_allowed,
   }
 
   return (
@@ -74,6 +75,7 @@ const DormCard = ({ listing }) => {
         <div>❄️ Aircon: {dorm.hasAircon ? 'Yes' : 'No'}</div>
         <div>🚪 Visitors: {dorm.allowVisitors ? 'Allowed' : 'Strictly No'}</div>
         <div>🍳 Cooking: {dorm.allowCooking ? 'Allowed' : 'No'}</div>
+        <div>🐕 Pets: {dorm.allowPets ? 'Allowed' : 'No'}</div>
       </div>
     </div>
   );
