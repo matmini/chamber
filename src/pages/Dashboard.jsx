@@ -7,22 +7,33 @@ export default function Dashboard() {
   const navigate = useNavigate(); 
   const [loading, setLoading] = useState(true);
   const [maxPrice, setMaxPrice] = useState(3000);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     // set a timer to fetch data after 300ms of silence
     const delayDebounceFn = setTimeout(async () => {
       console.log("[FETCHING] Dorms from Supabase...");
-      const { data, error } = await supabase  
+      
+      let query = supabase
         .from('dorms')
         .select('*')
         .lte('price', maxPrice);
+      
+      if (searchTerm.trim() !=='') {
+        query = query.ilike('name', `%${searchTerm}%`);
+        // % characters mean "match nyting before or after this text"
+      }
+
+      const { data, error } = await query;
+
       setLoading(false);
       if (!error) setListings(data);
+
       console.log(`[SUCCESS] Data fetched from Supabase`)
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [maxPrice]);
+  }, [maxPrice, searchTerm]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -51,6 +62,17 @@ export default function Dashboard() {
         // Updates instantly so the visual handle moves perfectly smooth
         onChange={(e) => setMaxPrice(Number(e.target.value))}
       />
+
+      {/**  Text Search Input */}
+      <div>
+        <label>Search: </label>
+        <input 
+          type="text"
+          placeholder="Search dorm"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       {listings.map(item => (
         <div key={item.id}>
           <h4>{item.name}</h4>
