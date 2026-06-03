@@ -9,7 +9,8 @@ export async  function getDistance(lat1, lng1, lat2, lng2){
       distance = data.routes[0].distance;
     }
   }catch(err) {
-    console.log(`[ERROR] ${err.message}`);
+    console.log(`[ERROR here] ${err.message}`);
   }
+  console.log(`Distance computed: ${distance}`);
   return distance;
 }

@@ -28,7 +28,7 @@ export default function AddDorm() {
               price: Number(price),
               lat: parseFloat(lat),
               lng: parseFloat(lng),
-              distance_to_up_main_gate: await getDistance(lat, lng, upGateCoordinates.lat, upGateCoordinates.lng)
+              distance_from_up_main_gate: await getDistance(lat, lng, upGateCoordinates.lat, upGateCoordinates.lng)
             }
           ]
         )
