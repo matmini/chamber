@@ -13,7 +13,7 @@ export default function Leaflet( {listings}) {
     {listings.map((listing) => (
       <Marker key={listing.id}  position={[listing.lat, listing.lng]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          {listing.name} <br /> ₱{listing.price}
         </Popup>
       </Marker>
     ))}
