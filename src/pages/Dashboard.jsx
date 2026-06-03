@@ -10,6 +10,22 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [maxPrice, setMaxPrice] = useState(7500);
   const [searchTerm, setSearchTerm] = useState('');
+  const [imageFiles, setImageFiles] = useState()
+  // Effect 1 : Fetch all images 
+  useEffect(()=> {
+    async function fetchAllImages() {
+      try {
+        const { data, error } = await supabase.from('dorm_images').select('*');
+        if (error) throw error; 
+        setImageFiles(data);
+        console.log(`[IMAGES FETCHED]`);
+        console.log(data);
+      } catch ( error ){
+        console.error(`[ERROR] Wasn't able to fetch images. ${error.message}`);
+      }
+    }
+    fetchAllImages();
+  }, []);
 
   useEffect(() => {
     // set a timer to fetch data after 300ms of silence
@@ -68,11 +84,15 @@ export default function Dashboard() {
           <input type="range" min="1000" max="10000" step="500"value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))} />
           
-          {listings.map(item => (
-            <div key={item.id}>
-              <DormCard key={item.id} listing={item}/>
-            </div>
-          ))}
+          {listings.map(listing => {
+            // filter the image pool for rows matching the specific dorm id 
+            const images = imageFiles.filter(img => img.dorm_id === listing.id); 
+            return (
+              <div key={listing.id}>
+                <DormCard key={listing.id} listing={listing} images={images}/>
+              </div>
+            )
+          })}
         </div>
         <div className='right-column'>
           <Leaflet listings={listings}></Leaflet>

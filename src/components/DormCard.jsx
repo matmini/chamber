@@ -1,7 +1,7 @@
-import React from 'react';
+import '../css/dormcard.css';
+import placeholderImage from '../assets/empty.png';
 
-
-const DormCard = ({ listing }) => {
+const DormCard = ({ listing , images}) => {
   const dorm = {
     name : listing.name,
     price  : listing.price,
@@ -14,23 +14,42 @@ const DormCard = ({ listing }) => {
     allowPets : listing.pets_allowed,
   }
 
+  // safely look for the first image URL from yoru foreign key join 
+  const displayImage = images && images.length > 0
+    ? images[0].image_url
+    : placeholderImage
   return (
     <div  className="dorm-card">
-      <div>
-        <span >{dorm.tenantType} only</span>
-        <h4>{dorm.name}</h4>
+      <div className="image-container">
+        <img 
+          src={displayImage} className="dorm-image"
+        />
       </div>
+      <div className="details-container">
+        <h4>{dorm.name}</h4>
+        <div className="price-row">
+          <span className="price">₱{listing.price.toLocaleString()}</span>
+          <span className="per-month-text">/month</span>
+        </div>
+        <span >{dorm.tenantType} only</span>
 
-      <p>₱ {dorm.price.toLocaleString()}/month</p>
-
-      {/* Amenity & Type Details Grid */}
-      <div >
-        <div>🏠 <strong>{dorm.type}</strong></div>
-        <div>👥 Max {dorm.capacity} pax</div>
-        <div>❄️ Aircon: {dorm.hasAircon ? 'Yes' : 'No'}</div>
-        <div>🚪 Visitors: {dorm.allowVisitors ? 'Allowed' : 'Strictly No'}</div>
-        <div>🍳 Cooking: {dorm.allowCooking ? 'Allowed' : 'No'}</div>
-        <div>🐕 Pets: {dorm.allowPets ? 'Allowed' : 'No'}</div>
+        <div className="specs-row">
+          <span>{listing.type}</span>
+          <span>|</span>
+          <span>{listing.tenantType}</span>
+          <span>|</span>
+          <span>{listing.capacity}</span>
+        </div>
+        
+        <div className="specs-row">
+          <span>Visitors: {listing.allowVisitors ? 'Allowed' : 'Strictly No'}</span>
+          <span>|</span>
+          <span>Cooking: {listing.allowCooking ? 'Allowed' : 'No'}</span>
+          <span>|</span>
+          <span>Pets: {listing.allowPets ? 'Allowed' : 'No'}</span>
+          <span>|</span>
+          <span>Aircon: {listing.hasAircon ? 'Yes' : 'No'}</span>
+        </div>
       </div>
     </div>
   );

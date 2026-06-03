@@ -72,5 +72,8 @@
   align-items: flex-start;
   width: 40%;
 }
-.right-column {
+.dorm-card-container {
+  display: flex;
+  padding: 20px;
+  /* background-color: blue; */
 }
