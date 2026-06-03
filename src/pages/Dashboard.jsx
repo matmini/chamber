@@ -47,8 +47,18 @@ export default function Dashboard() {
   return (
     <div className="container">
       <div className="nav">
-        <h2>Dashboard Page</h2>
-        <button onClick={handleLogout}>Logout</button>
+        <div className="nav-left">
+          <p>chamber</p>
+          <div className="search-container">
+            <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input 
+              className="search-input" type="text" placeholder="Search dorm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        <button onClick={handleLogout}>Sign out</button>
       </div>
       <div id="div-split">
         <div className='left-column'>
@@ -57,15 +67,7 @@ export default function Dashboard() {
           <label>Max Price: ₱{maxPrice}</label>
           <input type="range" min="1000" max="10000" step="500"value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))} />
-          <div>
-            <label>Search: </label>
-            <input 
-              type="text"
-              placeholder="Search dorm"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
+          
           {listings.map(item => (
             <div key={item.id}>
               <DormCard key={item.id} listing={item}/>

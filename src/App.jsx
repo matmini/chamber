@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard';
 import AddDorm  from './pages/AddDorm'; 
 
 import 'leaflet/dist/leaflet.css';
-
+import './App.css';
 function App() {
   return (
     <BrowserRouter>
