@@ -1,0 +1,26 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.nav {
+  height: 60px;
+  /*background-color: green;*/
+  box-sizing: border-box;
+}
+#div-split {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  /*background-color: green;*/
+  height: calc(100vh-60px);
+}
+.left-column {
+  width: 70%;;
+  /*display: flex;
+  justify-content: flex-start;*/
+}
+.right-column {
+  flex: 2;
+
+}

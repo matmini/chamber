@@ -45,13 +45,13 @@ export default function Dashboard() {
   if (loading) return <p>Loading awesome dorms...</p>
 
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="nav">
         <h2>Dashboard Page</h2>
         <button onClick={handleLogout}>Logout</button>
       </div>
-      <div class="div-split">
-        <div class='left'>
+      <div id="div-split">
+        <div className='left-column'>
           <Link to="/add">+ Add New Dorm Listing</Link> 
           <h3>Active Listings ({listings.length})</h3>
           <label>Max Price: ₱{maxPrice}</label>
@@ -72,7 +72,7 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
-        <div class='right'>
+        <div className='right-column'>
           <Leaflet listings={listings}></Leaflet>
         </div>
       </div>
