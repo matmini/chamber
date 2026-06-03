@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { supabase } from '../supabaseClient'; 
 import { useNavigate, Link } from 'react-router-dom'; 
 
+import { getDistance } from '../utils/getDistance';
+
+const upGateCoordinates = {lat: 14.167405, lng: 121.243347};
+
 export default function AddDorm() {
   const [dormName, setDormName] = useState(''); 
   const [price, setPrice] = useState(''); 
@@ -14,7 +18,6 @@ export default function AddDorm() {
 
   const handleAddDorm = async (e) => {
     e.preventDefault(); 
-
     try {
       const { data: newDorm, error: dormError } = await supabase
         .from('dorms')
@@ -24,7 +27,8 @@ export default function AddDorm() {
               name: dormName,
               price: Number(price),
               lat: parseFloat(lat),
-              lng: parseFloat(lng)
+              lng: parseFloat(lng),
+              distance_to_up_main_gate: await getDistance(lat, lng, upGateCoordinates.lat, upGateCoordinates.lng)
             }
           ]
         )
@@ -34,6 +38,7 @@ export default function AddDorm() {
       if (dormError) console.log(dormError);
       console.log(`${dormName} added to table dorms`)
       
+
       const newDormId = newDorm.id; 
 
       // Loop through the selected image files and upload them 
