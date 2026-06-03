@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
   const [loading, setLoading] = useState(true);
-  const [maxPrice, setMaxPrice] = useState(3000);
+  const [maxPrice, setMaxPrice] = useState(7500);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
