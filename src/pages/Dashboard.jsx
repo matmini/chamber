@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom'; 
 import DormCard from '../components/DormCard.jsx';
-
+import Leaflet from '../components/Leaflet.jsx';
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
@@ -51,6 +51,9 @@ export default function Dashboard() {
       </div>
 
       <Link to="/add">+ Add New Dorm Listing</Link> 
+
+      <Leaflet listings={listings}></Leaflet>
+
 
       <h3>Active Listings ({listings.length})</h3>
       <label>Max Price: ₱{maxPrice}</label>
