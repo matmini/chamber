@@ -1,3 +1,4 @@
+import '../css/dashboard.css';
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom'; 
@@ -49,32 +50,32 @@ export default function Dashboard() {
         <h2>Dashboard Page</h2>
         <button onClick={handleLogout}>Logout</button>
       </div>
-
-      <Link to="/add">+ Add New Dorm Listing</Link> 
-
-      <Leaflet listings={listings}></Leaflet>
-
-
-      <h3>Active Listings ({listings.length})</h3>
-      <label>Max Price: ₱{maxPrice}</label>
-      <input type="range" min="1000" max="10000" step="500"value={maxPrice}
-        onChange={(e) => setMaxPrice(Number(e.target.value))}
-      />
-
-      <div>
-        <label>Search: </label>
-        <input 
-          type="text"
-          placeholder="Search dorm"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      {listings.map(item => (
-        <div key={item.id}>
-          <DormCard key={item.id} listing={item}/>
+      <div class="div-split">
+        <div class='left'>
+          <Link to="/add">+ Add New Dorm Listing</Link> 
+          <h3>Active Listings ({listings.length})</h3>
+          <label>Max Price: ₱{maxPrice}</label>
+          <input type="range" min="1000" max="10000" step="500"value={maxPrice}
+            onChange={(e) => setMaxPrice(Number(e.target.value))} />
+          <div>
+            <label>Search: </label>
+            <input 
+              type="text"
+              placeholder="Search dorm"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          {listings.map(item => (
+            <div key={item.id}>
+              <DormCard key={item.id} listing={item}/>
+            </div>
+          ))}
         </div>
-      ))}
+        <div class='right'>
+          <Leaflet listings={listings}></Leaflet>
+        </div>
+      </div>
     </div>
   )
 }
