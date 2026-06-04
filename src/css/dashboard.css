@@ -34,6 +34,23 @@
   align-items: center;
   gap: 20px
 }
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase; /* Minimal designs look great with tracked-out uppercase text */
+  letter-spacing: 0.5px;
+  border-radius: 4px; /* Slight roundness, avoids the bulky capsule look */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+  outline: none;
+  border: 1px solid transparent;
+}
 .search-container {
   position: relative;
   width: 100%;

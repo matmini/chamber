@@ -112,7 +112,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="nav-right">
-          <Link to="/add">+ Add New Dorm Listing</Link> 
+          <Link to="/add">Add New Listing</Link> 
           <button onClick={handleLogout}>Sign out</button>
          </div>
       </div>
