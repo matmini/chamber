@@ -39,6 +39,9 @@ const DormCard = ({ listing , images, onClick}) => {
           <span>|</span>
           <span>Aircon: {listing.has_aircon ? 'Yes' : 'No'}</span>
         </div>
+        {listing.distance_from_up_main_gate && (
+          <div>{listing.distance_from_up_main_gate} meters from UP main gate</div>
+        )}
       </div>
     </div>
   );
