@@ -96,6 +96,9 @@
 }
 .left-column {
   /* background-color: red; */
+  flex: 1;
+  height: 100%;
+  position: relative;
 }
 
 .filter-form {
