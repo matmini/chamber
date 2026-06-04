@@ -74,11 +74,16 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <button onClick={handleLogout}>Sign out</button>
+        <div class="nav-right">
+          <Link to="/add">+ Add New Dorm Listing</Link> 
+          <button onClick={handleLogout}>Sign out</button>
+         </div>
       </div>
       <div id="div-split">
+        <div className='right-column'>
+          <Leaflet listings={listings}></Leaflet>
+        </div>
         <div className='left-column'>
-          <Link to="/add">+ Add New Dorm Listing</Link> 
           <h3>Active Listings ({listings.length})</h3>
           <label>Max Price: ₱{maxPrice}</label>
           <input type="range" min="1000" max="10000" step="500"value={maxPrice}
@@ -93,9 +98,6 @@ export default function Dashboard() {
               </div>
             )
           })}
-        </div>
-        <div className='right-column'>
-          <Leaflet listings={listings}></Leaflet>
         </div>
       </div>
     </div>
