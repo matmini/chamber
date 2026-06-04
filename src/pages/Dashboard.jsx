@@ -130,14 +130,14 @@ export default function Dashboard() {
           </div>
 
           <form className="filter-form">
-            <select id="type-filter" name="type" onChange={handleOptionFilterChange}>
+            <select className="select" id="type-filter" name="type" onChange={handleOptionFilterChange}>
                 <option value="any-type">Any type</option>
                 <option value="studio">Studio Type </option>
                 <option value="1-room">1-Room</option>
                 <option value="2-room">2-Room</option>
                 <option value="3-or-more">3+ Rooms</option>
             </select>
-            <select id="capacity-filter" name="capacity" onChange={handleOptionFilterChange}>
+            <select className="select" id="capacity-filter" name="capacity" onChange={handleOptionFilterChange}>
                 <option value="any-capacity">Any capacity</option>
                 <option value="1">Solo</option>
                 <option value="2">2/room</option>
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 <option value="4">4/room</option>
                 <option value="4-or-more">4+/room</option>
             </select>
-            <select id="gender-filter" name="gender" onChange={handleOptionFilterChange}>
+            <select className="select" id="gender-filter" name="gender" onChange={handleOptionFilterChange}>
                 <option value="any-gender">Any gender</option>
                 <option value="female">Females only</option>
                 <option value="male">Males only</option>

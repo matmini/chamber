@@ -105,3 +105,19 @@
   display: flex;
   gap: 10px;
 }
+
+.select {
+  border: 1px solid #e6e6e8;border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  color: #242428;
+  cursor: pointer;
+  
+}
+.select:focus {
+  outline: none;
+  border-color: #242428; /* The iconic Strava Orange */
+}
+.select:hover {
+  background-color:#f7f7f8 ;
+}
