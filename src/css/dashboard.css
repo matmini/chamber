@@ -55,6 +55,7 @@ button {
   position: relative;
   width: 100%;
   max-width: 480px;
+  border: 1px solid transparent;
 }
 .search-input {
   width: 100%;
@@ -65,9 +66,12 @@ button {
   color: #1a1a1a;
   background-color: #f4f4f5; /* Subtle off-white/light gray background */
   border: 1px solid transparent; /* Keeps it seamless initially */
-  border-radius: 24px; /* Gives it that pill-shaped modern capsule look */
+  border-radius: 9px; /* Gives it that pill-shaped modern capsule look */
   outline: none;
   transition: all 0.2s ease-in-out; /* Smooth transition for the focus effect */
+}
+.search-input:focus-within {
+  border-color: #000000;    
 }
 .search-icon {
   position: absolute;
