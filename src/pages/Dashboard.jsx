@@ -105,7 +105,7 @@ export default function Dashboard() {
                   onClick={() => {
                     setActiveImages(images);
                     setIsModalOpen(true)
-                     console.log(`${listing.name} clicked. ${images.length} photos`)
+                    // console.log(`${listing.name} clicked. ${images.length} photos`)
                   }}
                 />
               </div>

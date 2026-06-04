@@ -15,6 +15,7 @@
   position: relative;
   max-width: 85%;
   max-height: 80vh;
+  /* background-color: yellow; */
 }
 
 .lightbox-img {
@@ -27,7 +28,7 @@
 .close-btn {
   position: absolute;
   top: 2rem;
-  right: 3rem;
+  right: 4rem;
   color: #fff;
   font-size: 3rem;
   cursor: pointer;

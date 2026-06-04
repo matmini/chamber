@@ -6,9 +6,9 @@ export default function LightboxModal ({images, onClose}) {
   if (!images || images.length === 0) {
     return (
       <div className="lightbox-overlay" onClick={onClose}>
+        <span className="close-btn" onClick={onClose}>&times;</span>
         <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-          <span className="close-btn" onClick={onClose}>&times;</span>
-          <p style={{ color :'#fff', textAlign: 'center'}}>No images available for this this dangerouslySetInnerHTML</p>
+          <p style={{ color :'#fff', textAlign: 'center'}}>No images available for this listing.</p>
         </div>
       </div>
     );
@@ -30,14 +30,14 @@ export default function LightboxModal ({images, onClose}) {
     
       <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
         <img
+          className="lightbox-img"
           src={images[currentIndex].image_url}
           alt = {`Dorm slide ${currentIndex+1}`}
-          className="lightbox-img"
         />
         {images.length > 1 && (
           <>
-            <buton className="lightbox-arrow prev" onClick={handlePrev}>&#10094;</buton>
-            <buton className="lightbox-arrow next" onClick={handleNext}>&#10095;</buton>
+            <button className="lightbox-arrow prev" onClick={handlePrev}>&#10094;</button>
+            <button className="lightbox-arrow next" onClick={handleNext}>&#10095;</button>
             <div className="lightbox-counter">
               {currentIndex+1} / {images.length}
             </div>
