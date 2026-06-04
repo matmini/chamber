@@ -20,8 +20,14 @@ export default function Dashboard() {
     capacity: 'any-capacity'
   });
 
-  // Effect 1 : Fetch all images 
+  const [user, setUser] = useState(null);
+
+  // Effect 1 : Get User Data & Fetch all dorm images 
   useEffect(()=> {
+    async function getUserData(){
+      const { data: { user }} = await supabase.auth.getUser();
+      setUser(user);
+    }
     async function fetchAllImages() {
       try {
         const { data, error } = await supabase.from('dorm_images').select('*');
@@ -33,6 +39,7 @@ export default function Dashboard() {
         console.error(`[ERROR] Wasn't able to fetch images. ${error.message}`);
       }
     }
+    getUserData();
     fetchAllImages();
   }, []);
 
@@ -118,6 +125,11 @@ export default function Dashboard() {
       </div>
       <div id="div-split">
         <div className='left-column'>
+          {user ? (
+            <div>Logged in as {user.email}</div>
+          ): (
+            <p>Loading profile</p>
+          )}
           <Leaflet listings={listings}></Leaflet>
         </div>
         <div className='right-column'>
