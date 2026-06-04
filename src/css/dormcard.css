@@ -6,7 +6,11 @@
   display:flex;
   padding: 10px;
   gap: 15px;
-  
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.dorm-card:hover {
+  background-color: #ffffff;     /* Light gray background shift */
 }
 .dorm-image {
   width: 150px;
