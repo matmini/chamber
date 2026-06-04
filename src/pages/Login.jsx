@@ -11,7 +11,7 @@ export default  function Login() {
     e.preventDefault();
     const {data , error} = await supabase.auth.signInWithPassword({email, password}); 
     if (error) console.log(error.message, data)
-    else navigate('/') // redirect to the main dashboard route
+    else navigate('/dashboard') // redirect to the main dashboard route
   };
 
   const handleSignUp = async (e) => {
