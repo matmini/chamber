@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom'; 
 import DormCard from '../components/DormCard.jsx';
 import Leaflet from '../components/Leaflet.jsx';
+import LightboxModal from '../components/LightboxModal.jsx';
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
@@ -11,6 +12,9 @@ export default function Dashboard() {
   const [maxPrice, setMaxPrice] = useState(7500);
   const [searchTerm, setSearchTerm] = useState('');
   const [imageFiles, setImageFiles] = useState()
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [activeImages, setActiveImages] = useState([]);
+
   // Effect 1 : Fetch all images 
   useEffect(()=> {
     async function fetchAllImages() {
@@ -74,7 +78,7 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <div class="nav-right">
+        <div className="nav-right">
           <Link to="/add">+ Add New Dorm Listing</Link> 
           <button onClick={handleLogout}>Sign out</button>
          </div>
@@ -94,12 +98,31 @@ export default function Dashboard() {
             const images = imageFiles.filter(img => img.dorm_id === listing.id); 
             return (
               <div key={listing.id}>
-                <DormCard key={listing.id} listing={listing} images={images}/>
+                <DormCard 
+                  key={listing.id} 
+                  listing={listing} 
+                  images={images}
+                  onClick={() => {
+                    setActiveImages(images);
+                    setIsModalOpen(true)
+                     console.log(`${listing.name} clicked. ${images.length} photos`)
+                  }}
+                />
               </div>
             )
           })}
         </div>
       </div>
+
+      {isModalOpen && (
+        <LightboxModal
+          images={activeImages}
+          onClose={() => {
+            setIsModalOpen(false);
+            setActiveImages([]);
+          }}  
+        />
+      )}
     </div>
   )
 }
