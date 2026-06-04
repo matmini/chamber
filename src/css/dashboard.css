@@ -78,7 +78,7 @@
   height: calc(100vh-60px);
   overflow-x: hidden;
 }
-.left-column {
+.right-column {
   /* background-color: green; */
   display: flex;
   flex-direction: column;
@@ -88,4 +88,7 @@
 .dorm-card-container {
   display: flex;
   /* background-color: blue; */
+}
+.left-column {
+  /* background-color: red; */
 }

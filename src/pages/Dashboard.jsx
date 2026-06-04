@@ -80,10 +80,10 @@ export default function Dashboard() {
          </div>
       </div>
       <div id="div-split">
-        <div className='right-column'>
+        <div className='left-column'>
           <Leaflet listings={listings}></Leaflet>
         </div>
-        <div className='left-column'>
+        <div className='right-column'>
           <h3>Active Listings ({listings.length})</h3>
           <label>Max Price: ₱{maxPrice}</label>
           <input type="range" min="1000" max="10000" step="500"value={maxPrice}
