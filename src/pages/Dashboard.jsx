@@ -14,6 +14,11 @@ export default function Dashboard() {
   const [imageFiles, setImageFiles] = useState()
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [activeImages, setActiveImages] = useState([]);
+  const [filters, setFilters] = useState({
+    type: 'any-type',
+    gender: 'coed',
+    capacity: 'any-capacity'
+  });
 
   // Effect 1 : Fetch all images 
   useEffect(()=> {
@@ -36,33 +41,61 @@ export default function Dashboard() {
     const delayDebounceFn = setTimeout(async () => {
       console.log("[FETCHING] Dorms from Supabase...");
       
-      let query = supabase
-        .from('dorms')
-        .select('*')
-        .lte('price', maxPrice);
+      // general query for getting all dorms
+      let query = supabase.from('dorms').select('*');
+
+      // search filter
+      if (searchTerm.trim() !=='') { 
+        query = query.ilike('name', `%${searchTerm}%`); 
+      }
       
-      if (searchTerm.trim() !=='') {
-        query = query.ilike('name', `%${searchTerm}%`);
-        // % characters mean "match nyting before or after this text"
+      // price filter
+      query = query.lte('price', maxPrice); 
+
+      // type filter -- apply no filter if any-type
+      if (filters.type !== 'any-type'){
+        query = query.eq('type', filters.type);
+      }
+
+      // gender filter -- apply no filter if any-gender
+      if (filters.gender !== 'any-gender'){
+        query = query.eq('tenant_type', filters.gender);
+      }
+
+      // capacity filter 
+      if (filters.capacity !== 'any-capacity'){
+        query = query.eq('capacity', filters.capacity);
       }
 
       const { data, error } = await query;
 
       setLoading(false);
+      // console.log(filters);
       if (!error) setListings(data);
-
-      console.log(`[SUCCESS] Data fetched from Supabase`)
+      console.log(`[SUCCESS] Data fetched from Supabase`);
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [maxPrice, searchTerm]);
+  }, [maxPrice, searchTerm, filters]);
 
+  const handleOptionFilterChange = (e) => {
+    const { name, value } = e.target; 
+    console.log(`Update ${name} to ${value}`);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value // Dynamically updates 'gender', 'distance', or 'capacity'
+    }));
+  }
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/login'); 
   }
 
-  if (loading) return <p>Loading awesome dorms...</p>
+  if (loading) 
+    return (
+      <p style={{ color :'#fff', textAlign: 'center'}}>Loading awesome dorms...</p>
+    )
+    
 
   return (
     <div className="container">
@@ -96,23 +129,27 @@ export default function Dashboard() {
             />
           </div>
 
-          <form class="filter-form">
-            <select id="type-filter" name="type">
+          <form className="filter-form">
+            <select id="type-filter" name="type" onChange={handleOptionFilterChange}>
+                <option value="any-type">Any type</option>
                 <option value="studio">Studio Type </option>
                 <option value="1-room">1-Room</option>
                 <option value="2-room">2-Room</option>
+                <option value="3-or-more">3+ Rooms</option>
             </select>
-            <select id="capacity-filter" name="capacity">
+            <select id="capacity-filter" name="capacity" onChange={handleOptionFilterChange}>
+                <option value="any-capacity">Any capacity</option>
                 <option value="1">Solo</option>
                 <option value="2">2/room</option>
                 <option value="3">3/room</option>
                 <option value="4">4/room</option>
-                <option value="more">4+/room</option>
+                <option value="4-or-more">4+/room</option>
             </select>
-            <select id="gender-filter" name="gender">
+            <select id="gender-filter" name="gender" onChange={handleOptionFilterChange}>
+                <option value="any-gender">Any gender</option>
+                <option value="female">Females only</option>
+                <option value="male">Males only</option>
                 <option value="mixed">Mixed/Coed</option>
-                <option value="female">Females</option>
-                <option value="male">Male</option>
             </select>
 
           </form>
