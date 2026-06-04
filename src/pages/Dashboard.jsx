@@ -89,10 +89,33 @@ export default function Dashboard() {
         </div>
         <div className='right-column'>
           <h3>Active Listings ({listings.length})</h3>
-          <label>Max Price: ₱{maxPrice}</label>
-          <input type="range" min="1000" max="10000" step="500"value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))} />
-          
+          <div className="div-max-price">
+            <label>Max Price: ₱{maxPrice}</label>
+            <input type="range" min="1000" max="10000" step="500"value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))} 
+            />
+          </div>
+
+          <form class="filter-form">
+            <select id="type-filter" name="type">
+                <option value="studio">Studio Type </option>
+                <option value="1-room">1-Room</option>
+                <option value="2-room">2-Room</option>
+            </select>
+            <select id="capacity-filter" name="capacity">
+                <option value="1">Solo</option>
+                <option value="2">2/room</option>
+                <option value="3">3/room</option>
+                <option value="4">4/room</option>
+                <option value="more">4+/room</option>
+            </select>
+            <select id="gender-filter" name="gender">
+                <option value="mixed">Mixed/Coed</option>
+                <option value="female">Females</option>
+                <option value="male">Male</option>
+            </select>
+
+          </form>
           {listings.map(listing => {
             // filter the image pool for rows matching the specific dorm id 
             const images = imageFiles.filter(img => img.dorm_id === listing.id); 
