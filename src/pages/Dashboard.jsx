@@ -124,7 +124,7 @@ export default function Dashboard() {
           <h3>Active Listings ({listings.length})</h3>
           <div className="div-max-price">
             <label>Max Price: ₱{maxPrice}</label>
-            <input type="range" min="1000" max="10000" step="500"value={maxPrice}
+            <input className="slider" type="range" min="1000" max="10000" step="500"value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))} 
             />
           </div>
