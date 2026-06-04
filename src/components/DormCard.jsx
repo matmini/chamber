@@ -2,17 +2,6 @@ import '../css/dormcard.css';
 import placeholderImage from '../assets/empty.png';
 
 const DormCard = ({ listing , images}) => {
-  const dorm = {
-    name : listing.name,
-    price  : listing.price,
-    type : listing.type,
-    capacity : listing.capacity,
-    hasAircon : listing.has_aircon, 
-    tenantType: listing.tenant_type,
-    allowVisitors: listing.visitors_allowed,
-    allowCooking : listing.cooking_allowed,
-    allowPets : listing.pets_allowed,
-  }
 
   // safely look for the first image URL from yoru foreign key join 
   const displayImage = images && images.length > 0
@@ -26,29 +15,29 @@ const DormCard = ({ listing , images}) => {
         />
       </div>
       <div className="details-container">
-        <h4>{dorm.name}</h4>
+        <h4>{listing.name}</h4>
         <div className="price-row">
           <span className="price">₱{listing.price.toLocaleString()}</span>
           <span className="per-month-text">/month</span>
         </div>
-        <span >{dorm.tenantType} only</span>
+        <span >{listing.tenant_type}</span>
 
         <div className="specs-row">
-          <span>{listing.type}</span>
+          <span>Type: {listing.type}</span>
           <span>|</span>
-          <span>{listing.tenantType}</span>
-          <span>|</span>
-          <span>{listing.capacity}</span>
+          <span>Capacity: {listing.capacity}</span>
         </div>
         
         <div className="specs-row">
-          <span>Visitors: {listing.allowVisitors ? 'Allowed' : 'Strictly No'}</span>
+          <span>Visitors: {listing.visitors_allowed ? 'Allowed' : 'Strictly No'}</span>
           <span>|</span>
-          <span>Cooking: {listing.allowCooking ? 'Allowed' : 'No'}</span>
+          <span>Cooking: {listing.cooking_allowed ? 'Allowed' : 'No'}</span>
+        </div>
+
+        <div className="specs-row">
+          <span>Pets: {listing.pets_allowed ? 'Allowed' : 'No'}</span>
           <span>|</span>
-          <span>Pets: {listing.allowPets ? 'Allowed' : 'No'}</span>
-          <span>|</span>
-          <span>Aircon: {listing.hasAircon ? 'Yes' : 'No'}</span>
+          <span>Aircon: {listing.has_aircon ? 'Yes' : 'No'}</span>
         </div>
       </div>
     </div>
