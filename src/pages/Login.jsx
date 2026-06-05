@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../supabaseClient'; 
 import { useNavigate } from 'react-router-dom'; 
 
+import '../css/login.css'
 export default  function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,14 +27,28 @@ export default  function Login() {
   };
 
   return (
-    <div style={{padding: '20px'}}>
-      <h2>chamber</h2>
-      <form>
-        <input type="email" placeholder="yourname@up.edu.ph" value={email} onChange={(e => setEmail(e.target.value))}/><br></br>
-        <input type="password" placeholder="Password" value={password} onChange={(e => setPassword(e.target.value))}/><br></br>
-        <button onClick={handleLogin}>Log In</button>
-        <button onClick={handleSignUp}>Sign Up</button>
-      </form>
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1 class="auth-title">chamber</h1>
+        <p class="auth-subtitle">Dorm management system<br></br> designed for UPLB community</p>
+        <form class="auth-form">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" placeholder="yourname@up.edu.ph" value={email} onChange={(e => setEmail(e.target.value))}/><br></br>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" value={password} onChange={(e => setPassword(e.target.value))}/><br></br>
+          </div>
+          <button onClick={handleLogin}>Log In</button>
+          <div className="signup-container">
+            <p class="sign-up" onClick={handleSignUp}>Sign Up</p>
+          </div>
+        </form>
+      </div>
+
+      <footer class="auth-footer">
+        <p>By clicking "Sign in with Google" or "Continue with email"</p>
+        <p> you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+      </footer>
     </div>
   )
 }
