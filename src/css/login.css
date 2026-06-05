@@ -60,6 +60,7 @@
   font-size: 0.95rem;
   outline: none;
   transition: all 0.15s ease;
+  color: black;
 }
 
 .input-group input:focus {
