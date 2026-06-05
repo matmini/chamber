@@ -38,7 +38,7 @@ export default  function Login() {
             <label for="password">Password</label>
             <input type="password" placeholder="Password" value={password} onChange={(e => setPassword(e.target.value))}/><br></br>
           </div>
-          <button onClick={handleLogin}>Log In</button>
+          <button className="login-btn" onClick={handleLogin}>Log In</button>
           <div className="signup-container">
             <p class="sign-up" onClick={handleSignUp}>Sign Up</p>
           </div>

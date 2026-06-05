@@ -68,7 +68,7 @@
   border-color: #7b1113;
 } 
 
-button {
+.login-btn {
   width: 100%; 
   background-color: #7b1113;
   color: #ffffff;
@@ -81,7 +81,7 @@ button {
   margin-bottom: 0.2rem;
 }
 
-button:hover {
+.login-btn:hover {
   background-color: #000000;
 }
 .signup-container{
