@@ -9,7 +9,7 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     // Check current active session on load 
     supabase.auth.getSession().then(({ data: { session }}) => {
-      console.log(session);
+      //console.log(session);
       setSession(session);
       setLoading(false);
     });

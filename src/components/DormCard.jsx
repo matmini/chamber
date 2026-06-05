@@ -3,45 +3,25 @@ import placeholderImage from '../assets/empty.png';
 
 const DormCard = ({ listing , images, onClick}) => {
 
+
   // safely look for the first image URL from yoru foreign key join 
   const displayImage = images && images.length > 0
     ? images[0].image_url
     : placeholderImage
   return (
     <div  className="dorm-card" onClick={onClick}>
-      <div className="image-container">
-        <img 
-          src={displayImage} className="dorm-image"
-        />
-      </div>
-      <div className="details-container">
-        <h4>{listing.name}</h4>
-        <div className="price-row">
-          <span className="price">₱{listing.price.toLocaleString()}</span>
-          <span className="per-month-text">/month</span>
-        </div>
-        <span >{listing.tenant_type}</span>
+      <img src={displayImage} className="card-picture"/>
 
-        <div className="specs-row">
-          <span>Type: {listing.type}</span>
-          <span>|</span>
-          <span>Capacity: {listing.capacity}</span>
+      <div className="card-info-overlay">
+        <h4 className="card-name">{listing.name}</h4>
+        <div className="card-meta">
+          <span className="card-price">₱{Number(listing.price).toLocaleString()}/mo</span>
+          {listing.rating? (
+            <span className="card-rating">⭐ {listing.rating.toFixed(1)}</span>
+          ): (
+            <span className="card-rating-new">New</span>
+          )}
         </div>
-        
-        <div className="specs-row">
-          <span>Visitors: {listing.visitors_allowed ? 'Allowed' : 'Strictly No'}</span>
-          <span>|</span>
-          <span>Cooking: {listing.cooking_allowed ? 'Allowed' : 'No'}</span>
-        </div>
-
-        <div className="specs-row">
-          <span>Pets: {listing.pets_allowed ? 'Allowed' : 'No'}</span>
-          <span>|</span>
-          <span>Aircon: {listing.has_aircon ? 'Yes' : 'No'}</span>
-        </div>
-        {listing.distance_from_up_main_gate && (
-          <div>{listing.distance_from_up_main_gate} meters from UP main gate</div>
-        )}
       </div>
     </div>
   );

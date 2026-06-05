@@ -16,7 +16,7 @@ export default function Leaflet( {listings}) {
   const defaultCoordinates = [14.168740,121.244345] // demarces area
 
   return (
-  <MapContainer center={defaultCoordinates} zoom={14} scrollWheelZoom={true} style={{height: '50vh', width: '30vw'}} >
+  <MapContainer center={defaultCoordinates} zoom={14} scrollWheelZoom={true} style={{height: '100%', width: '100%'}} >
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -24,7 +24,9 @@ export default function Leaflet( {listings}) {
     {listings.map((listing) => (
       <Marker key={listing.id}  position={[listing.lat, listing.lng]}>
         <Popup>
-          {listing.name} <br /> ₱{listing.price}
+          <div style={{ color: '#000'}}>
+            {listing.name} <br /> ₱{listing.price}
+          </div>
         </Popup>
       </Marker>
     ))}

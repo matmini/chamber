@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import DormCard from '../components/DormCard.jsx';
 import Leaflet from '../components/Leaflet.jsx';
 import LightboxModal from '../components/LightboxModal.jsx';
+import Map from '../components/Map.jsx';
+import DormRow from '../components/DormRow.jsx';
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
@@ -12,8 +14,6 @@ export default function Dashboard() {
   const [maxPrice, setMaxPrice] = useState(7500);
   const [searchTerm, setSearchTerm] = useState('');
   const [imageFiles, setImageFiles] = useState()
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [activeImages, setActiveImages] = useState([]);
   const [filters, setFilters] = useState({
     type: 'any-type',
     gender: 'coed',
@@ -24,6 +24,17 @@ export default function Dashboard() {
 
   // Effect 1 : Get User Data & Fetch all dorm images 
   useEffect(()=> {
+    async function getAllDorms(){
+      const { data, error } = await supabase
+        .from('dorms')
+        .select('*');
+      if (error) {
+        console.error('Error fetching dorms: ', error);
+      } else {
+        setListings(data)
+      }
+      setLoading(false);
+    }
     async function getUserData(){
       const { data: { user }} = await supabase.auth.getUser();
       setUser(user);
@@ -34,15 +45,23 @@ export default function Dashboard() {
         if (error) throw error; 
         setImageFiles(data);
         console.log(`[IMAGES FETCHED]`);
-        console.log(data);
+        // console.log(data);
       } catch ( error ){
         console.error(`[ERROR] Wasn't able to fetch images. ${error.message}`);
       }
     }
     getUserData();
+    getAllDorms();
     fetchAllImages();
+
   }, []);
 
+  
+  const petFriendlyDorms = listings.filter(listing => listing.pets_allowed === true);
+  const budgetDorms = listings.filter(listing => listing.price < 2500);
+  const femaleOnlyDorms = listings.filter(listing => listing.tenant_type === 'female'); 
+  // console.log(`Pet Friendly Dorms: ${femaleOnlyDorms[0].name}`);
+/*
   useEffect(() => {
     // set a timer to fetch data after 300ms of silence
     const delayDebounceFn = setTimeout(async () => {
@@ -84,7 +103,7 @@ export default function Dashboard() {
 
     return () => clearTimeout(delayDebounceFn);
   }, [maxPrice, searchTerm, filters]);
-
+*/
   const handleOptionFilterChange = (e) => {
     const { name, value } = e.target; 
     console.log(`Update ${name} to ${value}`);
@@ -110,9 +129,6 @@ export default function Dashboard() {
         <div className="nav-left">
           <h3>chamber</h3>
           <div className="search-container">
-            <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
             <input 
               className="search-input" type="text" placeholder="Search dorm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -123,14 +139,22 @@ export default function Dashboard() {
           <button onClick={handleLogout}>Sign out</button>
          </div>
       </div>
-      <div id="div-split">
+
+       <Map listings={listings}/>
+
+      <div className="rows-container">
+        <DormRow title="Budget-Friendly (Under₱2.5k)" dorms={budgetDorms} images={imageFiles}/> 
+        <DormRow title="Pet-Friendly Dorms" dorms={petFriendlyDorms} images={imageFiles}/> 
+        <DormRow title="Ladies' Dormitories" dorms={femaleOnlyDorms} images={imageFiles}/> 
+      </div> *
+
+      {/* <div id="div-split">
         <div className='left-column'>
           {user ? (
             <div>Logged in as {user.email}</div>
           ): (
             <p>Loading profile</p>
           )}
-          <Leaflet listings={listings}></Leaflet>
         </div>
         <div className='right-column'>
           <h3>Active Listings ({listings.length})</h3>
@@ -184,17 +208,9 @@ export default function Dashboard() {
             )
           })}
         </div>
-      </div>
+      </div> */}
 
-      {isModalOpen && (
-        <LightboxModal
-          images={activeImages}
-          onClose={() => {
-            setIsModalOpen(false);
-            setActiveImages([]);
-          }}  
-        />
-      )}
+
     </div>
   )
 }

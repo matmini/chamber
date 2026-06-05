@@ -1,0 +1,27 @@
+.dorm-row {
+  margin-bottom: 35px;
+  width: 100%;
+}
+.row-title {
+  font-size: 1.4rem; 
+  font-weight: 700; 
+  color: #e5e5e5;
+  margin: 0 0 12px 0; 
+  padding-left: 4%; 
+  transition: color 0.2s ease;
+}
+
+.dorm-row:hover .row-title {
+  color: #ffffff;
+}
+.row-posters {
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: nowrap; 
+  gap: 16px; 
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  padding: 12px 4% ;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
