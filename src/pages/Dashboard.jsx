@@ -7,6 +7,7 @@ import Leaflet from '../components/Leaflet.jsx';
 import LightboxModal from '../components/LightboxModal.jsx';
 import Map from '../components/Map.jsx';
 import DormRow from '../components/DormRow.jsx';
+import Navbar from '../components/Navbar.jsx';
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
@@ -125,7 +126,8 @@ export default function Dashboard() {
 
   return (
     <div className="container">
-      <div className="nav">
+      <Navbar></Navbar>
+      {/* <div className="nav">
         <div className="nav-left">
           <h3>chamber</h3>
           <div className="search-container">
@@ -138,7 +140,7 @@ export default function Dashboard() {
           <Link to="/add">Add New Listing</Link> 
           <button onClick={handleLogout}>Sign out</button>
          </div>
-      </div>
+      </div> */}
 
        <Map listings={listings}/>
 

@@ -5,14 +5,14 @@
 .row-title {
   font-size: 1.4rem; 
   font-weight: 700; 
-  color: #e5e5e5;
+  color: #111;
   margin: 0 0 12px 0; 
   padding-left: 4%; 
   transition: color 0.2s ease;
 }
 
 .dorm-row:hover .row-title {
-  color: #ffffff;
+  color:rgb(107, 107, 107);
 }
 .row-posters {
   display: flex; 

@@ -3,7 +3,8 @@
   width: 280px;
   height: 160px;
   position: relative; 
-  background-color: #181818;
+  background-color: #fff;
+  color: #111;
   border-radius: 6px; 
   overflow: hidden; 
   cursor: pointer;
@@ -34,9 +35,9 @@
 
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.7) 65%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.7) 65%,
+    rgba(255, 255, 255, 0) 100%
   );
 }
 .dorm-card:hover{
@@ -57,7 +58,7 @@ CARD CONTENT TYPOGRAPHY
   margin: 0; 
   font-size: 0.95rem;
   font-weight: 500;
-  color: #ffffff; 
+  color: #111; 
 
   white-space: nowrap;
   overflow: hidden; 
