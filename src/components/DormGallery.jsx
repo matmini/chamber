@@ -25,11 +25,14 @@ export default function DormRow({ title, dorms, images }){
       <h2 className="gallery-title">{title}</h2>
       <div className="gallery-container">
         {dorms.map((dorm) => {
+          const dormImages = (images && images.length > 0)
+            ? images.filter(img => img.dorm_id === dorm.id)
+            : [];
           return(
             <DormCard 
               key={dorm.id} 
               listing={dorm} 
-              images={images}
+              images={dormImages}
               onClick={() => {
                 setActiveImages(images);
                 setIsModalOpen(true)
