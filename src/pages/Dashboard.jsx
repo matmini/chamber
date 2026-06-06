@@ -29,7 +29,8 @@ export default function Dashboard() {
     async function getAllDorms(){
       const { data, error } = await supabase
         .from('dorms')
-        .select('*');
+        .select('*')
+        .order('name');
       if (error) {
         console.error('Error fetching dorms: ', error);
       } else {
