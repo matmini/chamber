@@ -41,4 +41,9 @@ body {
   max-width: 450px;
   z-index: 20000;
 }
+.map-floating-card h1{
+  line-height: 0.85;
+  color: #fff;
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.4);
+}
 
