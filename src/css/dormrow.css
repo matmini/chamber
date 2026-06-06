@@ -11,9 +11,6 @@
   transition: color 0.2s ease;
 }
 
-.dorm-row:hover .row-title {
-  color:rgb(107, 107, 107);
-}
 .row-posters {
   display: flex; 
   flex-direction: row; 

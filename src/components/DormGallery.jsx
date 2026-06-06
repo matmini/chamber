@@ -1,0 +1,47 @@
+import '../css/dormgallery.css';
+import DormCard from './DormCard';
+
+import { useState } from 'react';
+
+
+export default function DormRow({ title, dorms, images }){
+  const [activeImages, setActiveImages] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+
+
+  if (!dorms || dorms.length === 0) {
+    return (
+      <div className="dorm-row">
+        <h2 className="row-title">{title}</h2>
+        <p className="no-results-text">No listings available in this category.</p>
+      </div>
+    );
+  }
+
+  // console.log(`${title}- (${dorms.length}) dorms.  [${images}] images`);
+  return (
+
+    <div className="dorm-gallery">
+      <h2 className="gallery-title">{title}</h2>
+      <div className="gallery-container">
+        {dorms.map((dorm) => {
+          return(
+            <DormCard 
+              key={dorm.id} 
+              listing={dorm} 
+              images={images}
+              onClick={() => {
+                setActiveImages(images);
+                setIsModalOpen(true)
+                // console.log(`${dorm.name} clicked. ${images.length} photos`)
+              }}
+            />
+          )
+        })}
+      </div>
+    </div>
+
+
+  );
+
+}

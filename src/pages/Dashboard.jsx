@@ -8,6 +8,7 @@ import LightboxModal from '../components/LightboxModal.jsx';
 import Map from '../components/Map.jsx';
 import DormRow from '../components/DormRow.jsx';
 import Navbar from '../components/Navbar.jsx';
+import DormGallery from '../components/DormGallery.jsx';
 export default function Dashboard() {
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
@@ -142,13 +143,14 @@ export default function Dashboard() {
          </div>
       </div> */}
 
-       <Map listings={listings}/>
+      <Map listings={listings}/>
 
       <div className="rows-container">
         <DormRow title="Budget-Friendly (Under₱2.5k)" dorms={budgetDorms} images={imageFiles}/> 
         <DormRow title="Pet-Friendly Dorms" dorms={petFriendlyDorms} images={imageFiles}/> 
         <DormRow title="Ladies' Dormitories" dorms={femaleOnlyDorms} images={imageFiles}/> 
-      </div> *
+        <DormGallery title="All Dorms" dorms={listings} images={imageFiles}/> 
+      </div> 
 
       {/* <div id="div-split">
         <div className='left-column'>
