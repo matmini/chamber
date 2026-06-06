@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
 });
 
 export default function Leaflet( {listings}) {
-  const defaultCoordinates = [14.168740,121.244345] // demarces area
+  const defaultCoordinates = [14.163877,121.207558] // demarces area
 
   return (
   <MapContainer center={defaultCoordinates} zoom={14} scrollWheelZoom={true} style={{height: '100%', width: '100%'}} >
