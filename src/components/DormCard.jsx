@@ -3,7 +3,6 @@ import placeholderImage from '../assets/empty.png';
 
 const DormCard = ({ listing , images, onClick}) => {
 
-
   // safely look for the first image URL from yoru foreign key join 
   const displayImage = images && images.length > 0
     ? images[0].image_url

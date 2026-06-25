@@ -36,10 +36,12 @@ body {
 
 .map-floating-card {
   position: absolute;
-  bottom: 80px;
+  top: 50%;
+  transform: translateY(-55%);
   left: 4%;
   max-width: 450px;
   z-index: 20000;
+
 }
 .map-floating-card h1{
   line-height: 0.85;

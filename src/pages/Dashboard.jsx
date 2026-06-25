@@ -47,7 +47,7 @@ export default function Dashboard() {
         const { data, error } = await supabase.from('dorm_images').select('*');
         if (error) throw error; 
         setImageFiles(data);
-        console.log(`[IMAGES FETCHED]`);
+        // console.log(`[IMAGES FETCHED]`);
         // console.log(data);
       } catch ( error ){
         console.error(`[ERROR] Wasn't able to fetch images. ${error.message}`);
@@ -214,8 +214,6 @@ export default function Dashboard() {
           })}
         </div>
       </div> */}
-
-
     </div>
   )
 }
