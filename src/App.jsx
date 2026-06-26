@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AddDorm  from './pages/AddDorm'; 
-
+import ListingPage from './pages/ListingPage';
 import ProtectedRoute from './ProtectedRoute';
 
 import 'leaflet/dist/leaflet.css';
@@ -14,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/listings/:id" element={<ListingPage/>}/>
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard/>

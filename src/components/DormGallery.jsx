@@ -3,7 +3,7 @@ import DormCard from './DormCard';
 import { useState } from 'react';
 
 
-export default function DormRow({ dorms, images }){
+export default function Gallery({ dorms, images }){
   const [activeImages, setActiveImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
@@ -30,10 +30,6 @@ export default function DormRow({ dorms, images }){
             key={dorm.id} 
             listing={dorm} 
             images={dormImages}
-            onClick={() => {
-              setActiveImages(images);
-              setIsModalOpen(true)
-            }}
           />
         )
       })}
