@@ -84,10 +84,12 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col items-center ">
       {/* <Navbar></Navbar> */}
-      <div className="mb-6 max-w-md">
+      <div id="search-container" 
+            className="px-3 py-8 w-full max-w-xl">
         <input type="text" placeholder="Search dorms or apartments" 
                 value={searchQuery}
-                onChange={(e)=> setSearchQuery(e.target.value)}/>
+                onChange={(e)=> setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2  bg-gray-100 rounded-full focus:outline-none"/>
       </div>
       
       <DormGallery dorms={listings} images={imageFiles}/> 
