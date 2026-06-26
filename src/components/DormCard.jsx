@@ -7,15 +7,16 @@ const DormCard = ({ listing , images, onClick}) => {
     ? images[0].image_url
     : placeholderImage
   return (
-    <div id="card" class="flex flex-col w-48 
-                          group cursor-pointer">
-      <div id="image-container" class="w-full h-48 rounded-sm overflow-hidden">
+    <div id="card" class="flex flex-col w-43 h-62.5
+                          group cursor-pointer
+                          ">
+      <div id="image-container" class="w-full h-43 rounded-2xl overflow-hidden">
         <img src={displayImage} class="w-full h-full object-cover"/>
       </div>
       <div class="flex flex-col text-start py-2">
-        <h5 id="price" class="group-hover:underline">₱{Number(listing.price).toLocaleString()}/mo</h5>
+        <h5 id="price" class="group-hover:underline font-semibold">PHP{Number(listing.price).toLocaleString()}/mo</h5>
         <h6 id="name" class="text-[12px] -my-1 group-hover:underline">{listing.name}</h6>
-        <p class="text-[11px] text-gray-400 group-hover:underline">9706 Banahaw St., Umali Subdivision</p>
+        <p class="text-[11px] text-gray-400 group-hover:underline line-clamp-1">9706 Banahaw St., Umali Subdivision umali subdivisodfjskdfjskdfj sdfjisdfjsi fsjidfji fsijdfjsi</p>
       </div>
 
     </div>
