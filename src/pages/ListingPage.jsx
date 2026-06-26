@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'; 
 import { useParams } from 'react-router-dom'; 
-import { Phone, Heart, AirVent, PawPrint, UsersRound, WashingMachine, CookingPot , Venus, Mars, VenusAndMars } from 'lucide-react';
-import { ChevronLeft, ChevronRight, ImageOff } from 'lucide-react';
+import { Phone, Heart, AirVent, PawPrint, UsersRound, WashingMachine, CookingPot , Venus, Mars, VenusAndMars, Leaf } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Leaflet  from '../components/Leaflet.jsx'
 
 export default function ListingPage() {
   const { id } = useParams();
@@ -110,7 +111,7 @@ export default function ListingPage() {
           </div>
         </div>
       </div>
-      <div id="right" className="bg-gray-50 py-10  w-[40%] flex flex-col items-center" >
+      <div id="right" className=" py-10 pl-5  w-[40%] flex flex-col items-center gap-5" >
         <button id="add-to-favorites" className='self-end text-[12px] bg-red-200 text-[rgb(172,51,51)]  px-6 py-2 rounded-full
                             flex flex-row gap-2 items-center
                             border border-[rgb(172,51,51)]
@@ -118,7 +119,9 @@ export default function ListingPage() {
           Add to favorites
           <Heart strokeWidth={1} className='size-5'></Heart>
         </button>
-        <div id="call" class=" flex gap-5 items-center py-10">
+
+        <Leaflet listing={listing}></Leaflet>
+        <div id="call" class=" flex gap-5 items-center ">
           <Phone></Phone>
           <p id="phone-number" className="text-xl">09228065791</p>
         </div>
