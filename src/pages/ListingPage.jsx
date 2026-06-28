@@ -143,6 +143,11 @@ export default function ListingPage() {
           <Phone></Phone>
           <p id="phone-number" className="text-xl">{listing.phone}</p>
         </div>
+        <div id="book-and-apply" className='text-lg flex flex-col w-full border border-mauve-200 rounded-sm p-5 gap-5'>
+            <button className='cursor-pointer py-3  rounded-lg bg-blue-500 text-white font-semibold'>Book tour now</button>
+            
+            <button className='cursor-pointer py-3 border rounded-lg border-blue-500 text-blue-500 font-semibold'>Request to apply</button>
+        </div>
       </div> 
     </div>
   );
