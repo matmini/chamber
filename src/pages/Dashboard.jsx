@@ -5,8 +5,10 @@ import Leaflet from '../components/Leaflet.jsx';
 import LightboxModal from '../components/LightboxModal.jsx';
 import Navbar from '../components/Navbar.jsx';
 import DormGallery from '../components/DormGallery.jsx';
-import { ChevronDown, ArrowUpDown } from 'lucide-react';
+import { ChevronDown, Search } from 'lucide-react';
 export default function Dashboard() {
+
+  const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState("");
   const [listings, setListings] = useState([]); 
@@ -51,6 +53,11 @@ export default function Dashboard() {
 
   }, [searchQuery, sortBy]);
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearchQuery(searchInput);
+  }
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -67,12 +74,16 @@ export default function Dashboard() {
     <div className="flex flex-col items-center ">
       {/* <Navbar></Navbar> */}
       <div id="filters" 
-            className="px-3 py-8 w-full max-w-xl">
-        <input id="search" type="text" placeholder="Search dorms or apartments" 
-                value={searchQuery}
-                onChange={(e)=> setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2  bg-gray-100 rounded-full focus:outline-none"
-        />
+            className="px-1 py-8 w-full max-w-xl">
+        <form onSubmit={handleSearchSubmit} className='relative flex overflow-hidden bg-gray-100 rounded-full'>
+          <input id="search" type="text" placeholder="Search dorms or apartments" 
+                  value={searchInput}
+                  onChange={(e)=> setSearchInput(e.target.value)}
+                  className="w-full px-4 py-2   focus:outline-none pr-16"
+          />
+          <button type="submit" className='flex bg-gray-300 justify-center w-20 cursor-pointer b absolute bottom-0 top-0 right-0'><Search className="place-self-center"></Search></button>
+        </form>
+
         <div id="summary-and-sort" className="flex justify-between ">
           <div id="summary">
             {searchQuery!=='' && 
