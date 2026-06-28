@@ -5,19 +5,15 @@ import Leaflet from '../components/Leaflet.jsx';
 import LightboxModal from '../components/LightboxModal.jsx';
 import Navbar from '../components/Navbar.jsx';
 import DormGallery from '../components/DormGallery.jsx';
+import { ChevronDown, ArrowUpDown } from 'lucide-react';
 export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState("");
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
   const [loading, setLoading] = useState(true);
-  const [maxPrice, setMaxPrice] = useState(7500);
-  const [searchTerm, setSearchTerm] = useState('');
   const [imageFiles, setImageFiles] = useState()
-  const [filters, setFilters] = useState({
-    type: 'any-type',
-    gender: 'coed',
-    capacity: 'any-capacity'
-  });
+  
 
   const [user, setUser] = useState(null);
 
@@ -25,7 +21,7 @@ export default function Dashboard() {
   useEffect(()=> {
     async function getAllDorms(){
       try {
-        const response = await fetch(`http://localhost:5000/listings?search=${searchQuery}`);
+        const response = await fetch(`http://localhost:5000/listings?search=${searchQuery}&sort=${sortBy}`);
         const data = await response.json(); 
         setListings(data);
         // console.log('done');
@@ -53,23 +49,9 @@ export default function Dashboard() {
     getAllDorms();
     fetchAllImages();
 
-  }, [searchQuery]);
+  }, [searchQuery, sortBy]);
 
 
-
-  
-  const petFriendlyDorms = listings.filter(listing => listing.pets_allowed === true);
-  const budgetDorms = listings.filter(listing => listing.price < 2500);
-  const femaleOnlyDorms = listings.filter(listing => listing.tenant_type === 'female'); 
- 
-  const handleOptionFilterChange = (e) => {
-    const { name, value } = e.target; 
-    console.log(`Update ${name} to ${value}`);
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value // Dynamically updates 'gender', 'distance', or 'capacity'
-    }));
-  }
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/login'); 
@@ -91,8 +73,31 @@ export default function Dashboard() {
                 onChange={(e)=> setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2  bg-gray-100 rounded-full focus:outline-none"/>
       </div>
+
+      <div id="sort-by" className='flex items-center gap-2 py-3 px-3 self-end'>
+        <p className='text-sm'>Sort By</p>
+        <div className="relative w-48">
+          {/* The Select Dropdown */}
+          <select 
+            value={sortBy} 
+            onChange={(e) => setSortBy(e.target.value)}
+            className="w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-10 text-sm text-gray-700 shadow-sm  focus:outline-none"
+          >
+            <option value="">Best Match</option>
+            <option value="price-asc">Price low to high</option>
+            <option value="price-desc">Price high to low</option>
+            <option value="distance-asc">Nearest to UP Gate</option>
+          </select>
+
+          {/* The Lucide Icon layered on top */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <ChevronDown className="h-4 w-4 text-gray-500" />
+          </div>
+        </div>
+      </div>
       
       <DormGallery dorms={listings} images={imageFiles}/> 
+
     </div>
   )
 }

@@ -7,7 +7,9 @@ export default function Gallery({ dorms, images }){
   const [activeImages, setActiveImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); 
 
-
+  // console.log("Type of dorms:", typeof dorms); 
+  // console.log("Is dorms an array?", Array.isArray(dorms));
+  // console.log("Actual dorms value:", dorms);
   if (!dorms || dorms.length === 0) {
     return (
       <div className="dorm-row">

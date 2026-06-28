@@ -44,7 +44,7 @@ export default function ListingPage() {
     );
   }
   return (
-    <div className=" w-5xl h-screen flex flex-row justify-center place-self-center">
+    <div className="mx-auto w-5xl h-screen flex flex-row justify-center place-self-center">
       <div id="left" className='py-10  w-[60%]' >
         <h1 id="name" className="text-4xl font-circular">{listing.name}</h1>
         <div id="image-viewer" className="relative my-4 w-full aspect-6/4 overflow-hidden">
