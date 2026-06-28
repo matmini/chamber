@@ -20,9 +20,8 @@ export default function Gallery({ dorms, images }){
 
   return (
     <div id="dorm-gallery"
-      className="w-full grid grid-cols-[repeat(auto-fill,minmax(172px,1fr))] gap-4 justify-items-center
-                md:max-w-250
-                border-2">
+      className="w-full grid grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(172px,1fr))] gap-4
+            ">
       {dorms.map((dorm) => {
         const dormImages = (images && images.length > 0)
           ? images.filter(img => img.dorm_id === dorm.id)

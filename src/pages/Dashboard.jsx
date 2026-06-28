@@ -6,11 +6,13 @@ import LightboxModal from '../components/LightboxModal.jsx';
 import Navbar from '../components/Navbar.jsx';
 import DormGallery from '../components/DormGallery.jsx';
 import { ChevronDown, Search } from 'lucide-react';
+import FilterSidebar from '../components/FilterSidebar.jsx';
 export default function Dashboard() {
 
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState('');
+  const [selectedTypes, setSelectedTypes]=useState([]); // type filters
   const [listings, setListings] = useState([]); 
   const navigate = useNavigate(); 
   const [loading, setLoading] = useState(true);
@@ -23,7 +25,8 @@ export default function Dashboard() {
   useEffect(()=> {
     async function getAllDorms(){
       try {
-        const response = await fetch(`http://localhost:5000/listings?search=${searchQuery}&sort=${sortBy}`);
+        const typeParam = selectedTypes.join(',');
+        const response = await fetch(`http://localhost:5000/listings?search=${searchQuery}&sort=${sortBy}&types=${typeParam}`);
         const data = await response.json(); 
         setListings(data);
         // console.log('done');
@@ -51,7 +54,7 @@ export default function Dashboard() {
     getAllDorms();
     fetchAllImages();
 
-  }, [searchQuery, sortBy]);
+  }, [searchQuery, sortBy, selectedTypes]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -71,10 +74,10 @@ export default function Dashboard() {
     
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col w-full max-w-7xl mx-auto">
       {/* <Navbar></Navbar> */}
-      <div id="filters" 
-            className="px-1 py-8 w-full max-w-xl">
+      <div id="search-and-sort" 
+            className="px-1 py-8 w-full max-w-xl self-end">
         <form onSubmit={handleSearchSubmit} className='relative flex overflow-hidden bg-gray-100 rounded-full'>
           <input id="search" type="text" placeholder="Search dorms or apartments" 
                   value={searchInput}
@@ -115,13 +118,16 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        
       </div>
 
-
-      
-      <DormGallery dorms={listings} images={imageFiles}/> 
-
+      <div id="filters-and-gallery" class="flex flex-col md:flex-row max-w-7xl">
+        <div id="filters" className='w-full md:w-64 shrink-0'>
+          <FilterSidebar selectedTypes={selectedTypes} setSelectedTypes={setSelectedTypes} className='w-full md:w-64 shrink-0'></FilterSidebar>
+        </div>
+        <div id="gallery" className='flex-1'>
+          <DormGallery dorms={listings} images={imageFiles}/> 
+        </div>
+      </div>
     </div>
   )
 }
