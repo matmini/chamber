@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom';
 // Import our tiny page files 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import AddDorm  from './pages/AddDorm'; 
+import CreateListing  from './pages/CreateListing'; 
 import ListingPage from './pages/ListingPage';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -20,7 +20,7 @@ function App() {
             <Dashboard/>
           </ProtectedRoute>
         } />
-        <Route path="/add" element={<AddDorm />} />
+        <Route path="/listings/create" element={<CreateListing />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />}/>
       </Routes>
     </BrowserRouter>
