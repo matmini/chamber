@@ -5,8 +5,9 @@ export default function FilterSidebar({ selectedTypes, setSelectedTypes }) {
 
   const apartmentTypes = [
     { id: 'studio', label: 'Studio' },
-    { id: '1br', label: '1 Bedroom' },
-    { id: '2br', label: '2 Bedroom' }
+    { id: '1br', label: '1 Room' },
+    { id: '2br', label: '2 Rooms' },
+    { id: 'many_br', label: '3+ Rooms' },
   ];
   const genderTypes = [
     { id: 'coed', label: 'COED' },
@@ -18,6 +19,9 @@ export default function FilterSidebar({ selectedTypes, setSelectedTypes }) {
     { id: 'aircon', label: 'With aircon'},
     { id: 'parking', label: 'With parking'},
     { id: 'curfew', label: 'With curfew'}, 
+  ];
+  
+  const restrictions = [
     { id: 'cooking', label: 'Cooking allowed'},
     { id: 'pets', label: 'Pets allowed'}, 
     { id: 'visitors', label: 'Visitors allowed'}
@@ -69,9 +73,24 @@ export default function FilterSidebar({ selectedTypes, setSelectedTypes }) {
         ))}
       </div>
       
-      <h3 className="text-sm font-semibold text-gray-900 my-3">Others</h3>
+      <h3 className="text-sm font-semibold text-gray-900 my-3">Amenities & Features</h3>
       <div className="space-y-2.5">
         {features.map((type) => (
+          <label key={type.id} className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 hover:text-gray-900">
+            <input
+              type="checkbox"
+              checked={selectedTypes.includes(type.id)}
+              onChange={() => handleCheckboxChange(type.id)}
+              className="h-4 w-4  cursor-pointer"
+            />
+            <span>{type.label}</span>
+          </label>
+        ))}
+      </div>
+      
+      <h3 className="text-sm font-semibold text-gray-900 my-3">Restrictions</h3>
+      <div className="space-y-2.5">
+        {restrictions.map((type) => (
           <label key={type.id} className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 hover:text-gray-900">
             <input
               type="checkbox"
