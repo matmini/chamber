@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'; 
 import { useParams } from 'react-router-dom'; 
-import { Phone, Heart, AirVent, PawPrint, UsersRound, WashingMachine, CookingPot , Venus, Mars, VenusAndMars, Leaf } from 'lucide-react';
+import { BedSingle , SquareParking ,Phone, Heart, AirVent, PawPrint, UsersRound, WashingMachine, CookingPot , Venus, Mars, VenusAndMars, Leaf } from 'lucide-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Leaflet  from '../components/Leaflet.jsx'
 
@@ -89,9 +89,26 @@ export default function ListingPage() {
             )}
             <p>{listing.tenant_type}</p>
           </div>
+          
+          <div id="type" className="flex flex-row gap-3 bg-[#ff7070] px-3 py-2 rounded-full">
+            <BedSingle strokeWidth={1} className="size-5"></BedSingle>
+
+            {listing.type === '1br' ? (
+              <p>1-bedroom</p>
+            ) : listing.type === '2br' ? (
+              <p>2-bedroom</p>
+            ) : (
+              <p>3+ rooms</p>
+            )}
+          </div>
+
           <div id="aircon" className="flex flex-row gap-3 bg-[#ff7070] px-3 py-2 rounded-full">
             <AirVent strokeWidth={1} className="size-5"></AirVent>
             <p>{listing.has_aircon ? "With Aircon" : "No Aircon"}</p>
+          </div>
+          <div id="parking" className="flex flex-row gap-3 bg-[#ff7070] px-3 py-2 rounded-full">
+            <SquareParking strokeWidth={1} className="size-5"></SquareParking>
+            <p>{listing.has_parking ? "With Parking" : "No Parking"}</p>
           </div>
           <div id="visitors" className="flex flex-row gap-3 bg-[#ff7070]  px-3 py-2 rounded-full">
             <UsersRound strokeWidth={1} className="size-5"></UsersRound>
