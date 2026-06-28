@@ -141,7 +141,7 @@ export default function ListingPage() {
         <Leaflet listing={listing}></Leaflet>
         <div id="call" class=" flex gap-5 items-center ">
           <Phone></Phone>
-          <p id="phone-number" className="text-xl">09228065791</p>
+          <p id="phone-number" className="text-xl">{listing.phone}</p>
         </div>
       </div> 
     </div>
