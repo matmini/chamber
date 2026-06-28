@@ -47,6 +47,7 @@ export default function ListingPage() {
     <div className="mx-auto w-5xl h-screen flex flex-row justify-center place-self-center">
       <div id="left" className='py-10  w-[60%]' >
         <h1 id="name" className="text-4xl font-circular">{listing.name}</h1>
+        <p id="address" className='text-lg text-mauve-600'>{listing.address}</p>
         <div id="image-viewer" className="relative my-4 w-full aspect-6/4 overflow-hidden">
           <img 
             src={images[imageIndex] } 
