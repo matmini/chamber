@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Funnel } from 'lucide-react';
 export default function FilterSidebar({ selectedTypes, setSelectedTypes }) {
   // Track selected apartment types
 
@@ -43,6 +43,10 @@ export default function FilterSidebar({ selectedTypes, setSelectedTypes }) {
 
   return (
     <div>
+      <div id="title" className='flex flex-row items-center gap-1 mb-2'>
+        <Funnel className='size-5 stroke-[1.5px]'></Funnel>
+        <h1 className='text-xl font-semibold'>SEARCH FILTER</h1>
+      </div>
       <h3 className="text-sm font-semibold text-gray-900 mb-3">Apartment Type</h3>
       
       <div className="space-y-2.5">
